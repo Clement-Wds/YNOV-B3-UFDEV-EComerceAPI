@@ -17,10 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//AUTHENTICATION
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-Route::post('/signin', 'App\Http\Controllers\UserController@createUser');
+//USER
 Route::post('/signin', 'App\Http\Controllers\UserController@createUser');
 Route::post('/edit_profile', 'App\Http\Controllers\UserController@editUser');
 Route::post('/change_password', 'App\Http\Controllers\UserController@changePassword');
