@@ -29,3 +29,9 @@ Route::post('/product/edit/{id}', 'App\Http\Controllers\ProductController@editPr
 Route::get('/product/{id}', 'App\Http\Controllers\ProductController@readProduct');
 Route::get('/product/delete/{id}', 'App\Http\Controllers\ProductController@deleteProduct');
 Route::get('/products', 'App\Http\Controllers\ProductController@listProducts');
+
+//CATEGORY
+Route::post('/category/create', 'App\Http\Controllers\CategoryController@createCategory');
+Route::post('/category/edit/{id}', 'App\Http\Controllers\CategoryController@editCategory');
+Route::get('/category/delete/{id}', 'App\Http\Controllers\CategoryController@deleteCategory');
+Route::get('/categories', 'App\Http\Controllers\CategoryController@listCategories');
