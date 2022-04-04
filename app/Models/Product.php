@@ -28,4 +28,12 @@ class Product extends Model
     public function productCategories(){
         return $this->hasMany(ProductCategory::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'cart', 'product_id', 'user_id');
+    }
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }
