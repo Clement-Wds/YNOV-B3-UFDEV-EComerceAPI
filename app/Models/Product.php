@@ -13,6 +13,7 @@ class Product extends Model
         'id',
         'name',
         'description',
+        'price',
         'photo',
         'average_score'
     ];

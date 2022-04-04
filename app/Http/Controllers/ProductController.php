@@ -26,11 +26,13 @@ class ProductController extends Controller
         request()->validate([
             'name' => ['required'],
             'description' => ['required'],
+            'price' => ['required']
         ]);
 
         $product = Product::create([
             'name' => request('name'),
             'description' => request('description'),
+            'price' => request('price')
         ]);
 
         //Le produit a été créé avec succès
@@ -57,11 +59,13 @@ class ProductController extends Controller
         
         request()->validate([
             'name' => ['required'],
-            'description' => ['required']
+            'description' => ['required'],
+            'price' => ['required']
         ]);
 
         $product->name = request('name');
         $product->description = request('description');
+        $product->price = request('price');
         $product->save();
 
         //Le produit a été modifié avc succès
