@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 //AUTHENTICATION
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
@@ -35,3 +24,10 @@ Route::post('/category/create', 'App\Http\Controllers\CategoryController@createC
 Route::post('/category/edit/{id}', 'App\Http\Controllers\CategoryController@editCategory');
 Route::get('/category/delete/{id}', 'App\Http\Controllers\CategoryController@deleteCategory');
 Route::get('/categories', 'App\Http\Controllers\CategoryController@listCategories');
+
+//MARK
+Route::post('/product/mark/create/{product_id}', 'App\Http\Controllers\MarkController@createMark');
+Route::get('/product/mark/{id}', 'App\Http\Controllers\MarkController@getMark');
+Route::get('/product/marks/{product_id}', 'App\Http\Controllers\MarkController@getMarks');
+Route::post('/product/mark/{id}', 'App\Http\Controllers\MarkController@editMark');
+Route::get('/product/delete/{id}', 'App\Http\Controllers\MarkController@deleteMark');

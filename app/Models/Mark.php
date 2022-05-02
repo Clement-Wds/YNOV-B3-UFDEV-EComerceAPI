@@ -12,6 +12,7 @@ class Mark extends Model
     protected $fillable = [
         'id',
         'mark',
+        'advice',
         'user_id',
         'product_id'
     ];

@@ -18,7 +18,8 @@ class Product extends Model
         'description',
         'price',
         'photo',
-        'average_score'
+        'average_score',
+        'quantity'
     ];
 
     public function categories(){
