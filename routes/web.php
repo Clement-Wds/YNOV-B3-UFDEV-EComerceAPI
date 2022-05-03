@@ -19,6 +19,9 @@ Route::get('/product/{id}', 'App\Http\Controllers\ProductController@readProduct'
 Route::get('/product/delete/{id}', 'App\Http\Controllers\ProductController@deleteProduct');
 Route::get('/products', 'App\Http\Controllers\ProductController@listProducts');
 
+Route::get('/products/category_id/{id}', 'App\Http\Controllers\ProductController@getProductsCategoryId');
+Route::get('/products/category_name/{identifier}', 'App\Http\Controllers\ProductController@getProductsCategoryName');
+
 //CATEGORY
 Route::post('/category/create', 'App\Http\Controllers\CategoryController@createCategory');
 Route::post('/category/edit/{id}', 'App\Http\Controllers\CategoryController@editCategory');
