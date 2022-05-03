@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product as Product;
+use App\Models\Category as Category;
+use App\Models\ProductCategory as ProductCategory;
 
 class ProductController extends Controller
 {
@@ -91,6 +93,40 @@ class ProductController extends Controller
         return($products);
     }
 
+    //Récupérer des produits grâce à l'id de la catégorie
+    //GET: /products/category_id/id
+    public function getProductsCategoryId(int $id){
+        $category = Category::where('id', $id)->firstOrFail();
+        $products = array();
+
+        $productsAll = Product::all();
+
+        foreach($productsAll as $product){
+            if($product->associateCategory($category)){
+                array_push($products, $product);
+            }
+        }
+
+        return($products);
+    }
+
+    //Récupérer des produits grâce au nom de la catégorie
+    //GET: /products/category_name/indentifier
+    public function getProductsCategoryName(string $identifier){
+        $category = Category::where('identifier', $identifier)->firstOrFail();
+        $products = array();
+
+        $productsAll = Product::all();
+
+        foreach($productsAll as $product){
+            if($product->associateCategory($category)){
+                array_push($products, $product);
+            }
+        }
+
+        return($products);
+    }
+    
     //Supprimer un produit
     //GET : /product/delete/id
     public function deleteProduct(int $id){

@@ -37,4 +37,8 @@ class Product extends Model
     public function cart(){
         return $this->hasMany(Cart::class);
     }
+
+    public function associateCategory($category){
+        return $this->categories()->where('category_id', $category->id)->exists();
+    }
 }
