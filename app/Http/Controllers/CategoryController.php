@@ -24,11 +24,13 @@ class CategoryController extends Controller
         }
 
         request()->validate([
-            'name' => ['required']
+            'name' => ['required'],
+            'identifer' => ['required']
         ]);
 
         $category = Category::create([
-            'name' => request('name')
+            'name' => request('name'),
+            'identifier' => request('identifier')
         ]);
 
         //Catégorie créée avec succès
@@ -54,10 +56,12 @@ class CategoryController extends Controller
         $category = Category::all()->where('id', $id)->firstOrFail();
 
         request()->validate([
-            'name' => ['required']
+            'name' => ['required'],
+            'identifier' => ['required']
         ]);
 
         $category->name = request('name');
+        $category->identifier = request('identifier');
         $category->save();
 
         //La catégorie a été modifiée avec succès
