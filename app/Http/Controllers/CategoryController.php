@@ -9,28 +9,28 @@ class CategoryController extends Controller
 {
     //Créer une catégorie
     //POST : /category/create
-    public function createCategory(){
-        //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+    public function createCategory(Request $request){
+        // //Check if user is auth
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     //return ('pas connectés');
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     //return ('pas bon statut');
+        // }
 
-        request()->validate([
-            'name' => ['required'],
-            'identifer' => ['required']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'identifer' => ['required']
+        // ]);
 
         $category = Category::create([
-            'name' => request('name'),
-            'identifier' => request('identifier')
+            'name' => $request->input('name'),
+            'identifier' => $request->input('identifier')
         ]);
 
         //Catégorie créée avec succès
@@ -39,29 +39,29 @@ class CategoryController extends Controller
 
     //Modifier une catégorie
     //POST : /catagory/edit/1
-    public function editCategory(int $id){
-        //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+    public function editCategory(Request $request, int $id){
+        // //Check if user is auth
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     return back();
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     return back();
+        // }
 
         $category = Category::all()->where('id', $id)->firstOrFail();
 
-        request()->validate([
-            'name' => ['required'],
-            'identifier' => ['required']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'identifier' => ['required']
+        // ]);
 
-        $category->name = request('name');
-        $category->identifier = request('identifier');
+        $category->name = $request->input('name');
+        $category->identifier = $request->input('identifier');
         $category->save();
 
         //La catégorie a été modifiée avec succès
@@ -71,18 +71,18 @@ class CategoryController extends Controller
     //Supprimer une catégorie
     //GET : /category/delete/1
     public function deleteCategory(int $id){
-        //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+        // //Check if user is auth
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     return back();
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     return back();
+        // }
 
         $category = Category::all()->where('id', $id)->firstOrFail();
         $category->delete();
