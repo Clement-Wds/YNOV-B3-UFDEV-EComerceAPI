@@ -11,32 +11,32 @@ class ProductController extends Controller
 {
     //Créer un produit
     //POST : /product/create
-    public function createProduct(){
-        //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+    public function createProduct(Request $request){
+        // //Check if user is auth
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     return back();
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     return back();
+        // }
 
-        request()->validate([
-            'name' => ['required'],
-            'description' => ['required'],
-            'price' => ['required'],
-            'quantity' => ['quantity']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'description' => ['required'],
+        //     'price' => ['required'],
+        //     'quantity' => ['quantity']
+        // ]);
 
         $product = Product::create([
-            'name' => request('name'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'quantity' => request('quantity')
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'quantity' => $request->input('quantity')
         ]);
 
         //Le produit a été créé avec succès
@@ -45,33 +45,33 @@ class ProductController extends Controller
 
     //Modifier un produit
     //POST : /product/edit/id
-    public function editProduct(int $id){
-        //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+    public function editProduct(Request $request, int $id){
+        // //Check if user is auth
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     return back();
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     return back();
+        // }
 
         $product = Product::all()->where('id', $id)->firstOrFail();
         
-        request()->validate([
-            'name' => ['required'],
-            'description' => ['required'],
-            'price' => ['required'],
-            'quantity' => ['required']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'description' => ['required'],
+        //     'price' => ['required'],
+        //     'quantity' => ['required']
+        // ]);
 
-        $product->name = request('name');
-        $product->description = request('description');
-        $product->price = request('price');
-        $product->quantity = request('quantity');
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
         $product->save();
 
         //Le produit a été modifié avc succès

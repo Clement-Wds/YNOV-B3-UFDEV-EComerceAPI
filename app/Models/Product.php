@@ -22,6 +22,8 @@ class Product extends Model
         'quantity'
     ];
 
+    public $timestamps = false;
+
     public function categories(){
         return $this->belongsToMany(Category::class, 'products_categories', 'category_id', 'product_id');
     }
