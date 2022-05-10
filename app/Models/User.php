@@ -46,6 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $timestamps = false;
+
     public function products(){
         return $this->belongsToMany(Product::class, 'cart', 'product_id', 'user_id');
     }

@@ -8,24 +8,24 @@ use App\Models\User as User;
 class UserController extends Controller
 {
     //Create Account
-    public function createUser(){
-        request()->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
-            'password_confirmation' => ['required'],
-        ]);
+    public function createUser(Request $request){
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
+        //     'password_confirmation' => ['required'],
+        // ]);
 
         //Check if user exist
-        $existingUser = User::where('email', request('email'))->first();
-        if($existingUser != null || $existingUser != '[]'){
+        $existingUser = User::where('email', $request->input('email'))->first();
+        if($existingUser != null){
             return ('ERREUR : Un compte existe déjà avec l\'adresse mail saisie !');
         }
 
         $user = User::create([
-            'name' => request('name'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
             'status' => 'user'
         ]);
 
@@ -33,7 +33,7 @@ class UserController extends Controller
     }
 
     //Change Account informations
-    public function editUser(){
+    public function editUser(Request $request){
         //Check if user is auth
         if(!auth()->check()){
             //Vous devez être connectés pour effectuer cette action
@@ -44,14 +44,14 @@ class UserController extends Controller
         $user = auth()->user();
 
         //Validation data
-        request()->validate([
-            'name' => ['required'],
-            'email' => ['required']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'email' => ['required']
+        // ]);
 
         //Change and save modification in DB
-        $user->name = request('name');
-        $user->email = request('email');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->save();
 
         //Vos modifications ont bien été enregitrées
@@ -59,7 +59,7 @@ class UserController extends Controller
     }
 
     //Change password
-    public function changePassword(){
+    public function changePassword(Request $request){
         //Check if user is auth
         if(!auth()->check()){
             //Vous devez être connectés pour effectuer cette action
@@ -70,14 +70,14 @@ class UserController extends Controller
         $user = auth()->user();
 
         //Validation data
-        request()->validate([
-            'current_password' => ['required'],
-            'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
-            'password_confirmation' => ['required']
-        ]);
+        // request()->validate([
+        //     'current_password' => ['required'],
+        //     'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
+        //     'password_confirmation' => ['required']
+        // ]);
 
-        if(Hash::check(request('current_password'), $user->password)){
-            $user->password = bcrypt(request('password'));
+        if(Hash::check($request->input('current_password'), $user->password)){
+            $user->password = bcrypt($request->input('password'));
             $user->save();
 
             //Succès de la modication du mot de passe
