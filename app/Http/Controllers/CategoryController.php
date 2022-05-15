@@ -23,10 +23,10 @@ class CategoryController extends Controller
         //     //return ('pas bon statut');
         // }
 
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'identifer' => ['required']
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'identifer' => ['required']
+        ]);
 
         $category = Category::create([
             'name' => $request->input('name'),
@@ -55,10 +55,10 @@ class CategoryController extends Controller
 
         $category = Category::all()->where('id', $id)->firstOrFail();
 
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'identifier' => ['required']
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'identifier' => ['required']
+        ]);
 
         $category->name = $request->input('name');
         $category->identifier = $request->input('identifier');

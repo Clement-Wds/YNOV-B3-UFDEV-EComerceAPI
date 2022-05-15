@@ -28,7 +28,7 @@ class MarkController extends Controller
         $product = Product::where('id', $productId)->firstOrFail();
 
         //Validation des données
-        request()->validate([
+        $request->validate([
             'mark' => ['required'],
             'advice' => ['required']
         ]);
@@ -85,7 +85,7 @@ class MarkController extends Controller
         }
 
         //Validation data
-        request()->validate([
+        $request->validate([
             'mark' => ['required'],
             'advice' => ['advice']
         ]);

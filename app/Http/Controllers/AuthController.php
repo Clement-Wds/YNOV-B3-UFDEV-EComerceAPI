@@ -9,10 +9,10 @@ class AuthController extends Controller
 {
     public function login(Request $request){
         //Validation data
-        // request()->validate([
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required']
-        // ]);
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
 
         //Check and authenticate
         $result = auth()->attempt([

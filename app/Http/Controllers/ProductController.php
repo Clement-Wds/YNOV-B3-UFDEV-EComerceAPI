@@ -25,12 +25,12 @@ class ProductController extends Controller
         //     return back();
         // }
 
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'description' => ['required'],
-        //     'price' => ['required'],
-        //     'quantity' => ['quantity']
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'quantity' => ['required']
+        ]);
 
         $product = Product::create([
             'name' => $request->input('name'),
@@ -61,12 +61,12 @@ class ProductController extends Controller
 
         $product = Product::all()->where('id', $id)->firstOrFail();
         
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'description' => ['required'],
-        //     'price' => ['required'],
-        //     'quantity' => ['required']
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'quantity' => ['required']
+        ]);
 
         $product->name = $request->input('name');
         $product->description = $request->input('description');

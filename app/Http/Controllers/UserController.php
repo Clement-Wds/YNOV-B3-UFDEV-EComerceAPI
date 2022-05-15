@@ -9,12 +9,12 @@ class UserController extends Controller
 {
     //Create Account
     public function createUser(Request $request){
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
-        //     'password_confirmation' => ['required'],
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
+            'password_confirmation' => ['required'],
+        ]);
 
         //Check if user exist
         $existingUser = User::where('email', $request->input('email'))->first();
@@ -49,10 +49,10 @@ class UserController extends Controller
         $user = auth()->user();
 
         //Validation data
-        // request()->validate([
-        //     'name' => ['required'],
-        //     'email' => ['required']
-        // ]);
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required']
+        ]);
 
         //Change and save modification in DB
         $user->name = $request->input('name');
