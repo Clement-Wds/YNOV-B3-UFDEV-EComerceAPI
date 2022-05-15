@@ -7,17 +7,17 @@ use App\Models\User as User;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login(Request $request){
         //Validation data
-        request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
+        // request()->validate([
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required']
+        // ]);
 
         //Check and authenticate
         $result = auth()->attempt([
-            'email' => request('email'),
-            'password' => request('password')
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
         ]);
 
         if($result){
@@ -25,7 +25,7 @@ class AuthController extends Controller
             return redirect('/');
         }
         //Erreur de connexion
-        return back();
+        return redirect('/login');
     }
 
     public function logout(){
