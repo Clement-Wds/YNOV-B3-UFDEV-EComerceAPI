@@ -29,7 +29,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        auth()->lougout();
+        auth()->logout();
         //Vous êtes déconnectés
         return redirect('/');
     }
