@@ -9,12 +9,12 @@ class UserController extends Controller
 {
     //Create Account
     public function createUser(Request $request){
-        $request->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
-            'password_confirmation' => ['required'],
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required', 'min:8', 'regex:/^(?=.*[a-z|A-Z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','confirmed'],
+        //     'password_confirmation' => ['required'],
+        // ]);
 
         //Check if user exist
         $existingUser = User::where('email', $request->input('email'))->first();
@@ -26,12 +26,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'status' => 'user',
-            'postal_code' => $request->input('postal_code'),
-            'city' => $request->input('city'),
-            'country' => $request->input('country'),
-            'postal_adress' => $request->input('postal_adress'),
-            'postal_supplement' => $request->input('postal_supplement')
+            'status' => 'user'
         ]);
 
         return redirect('/login');
@@ -49,19 +44,14 @@ class UserController extends Controller
         $user = auth()->user();
 
         //Validation data
-        $request->validate([
-            'name' => ['required'],
-            'email' => ['required']
-        ]);
+        // request()->validate([
+        //     'name' => ['required'],
+        //     'email' => ['required']
+        // ]);
 
         //Change and save modification in DB
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->postal_code = $request->input('postal_code');
-        $user->city = $request->input('city');
-        $user->country = $request->input('country');
-        $user->postal_adress = $request->input('postal_adress');
-        $user->postal_supplement = $request->input('postal_supplement');
         $user->save();
 
         //Vos modifications ont bien été enregitrées

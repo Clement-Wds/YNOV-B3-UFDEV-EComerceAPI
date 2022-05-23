@@ -23,10 +23,10 @@ class CategoryController extends Controller
         //     //return ('pas bon statut');
         // }
 
-        $request->validate([
-            'name' => ['required'],
-            'identifer' => ['required']
-        ]);
+        //$request->validate([
+            //'name' => ['required'],
+            //'identifer' => ['required']
+        //]);
 
         $category = Category::create([
             'name' => $request->input('name'),
