@@ -131,17 +131,17 @@ class ProductController extends Controller
     //GET : /product/delete/id
     public function deleteProduct(int $id){
         //Check if user is auth
-        if(!auth()->check()){
-            //Vous devez être connectés pour effectuer cette action
-            return back();
-        }
+        // if(!auth()->check()){
+        //     //Vous devez être connectés pour effectuer cette action
+        //     return back();
+        // }
 
-        $user = auth()->user();
-        //Ckeck user status
-        if($user->status != 'admin'){
-            //Vous n'avez pas l'autorisation d'effectuer cette action
-            return back();
-        }
+        // $user = auth()->user();
+        // //Ckeck user status
+        // if($user->status != 'admin'){
+        //     //Vous n'avez pas l'autorisation d'effectuer cette action
+        //     return back();
+        // }
 
         $product = Product::all()->where('id', $id)->firstOrFail();
 
