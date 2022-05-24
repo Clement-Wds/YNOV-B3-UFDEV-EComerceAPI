@@ -36,7 +36,8 @@ class ProductController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'quantity' => $request->input('quantity')
+            'quantity' => $request->input('quantity'),
+            'category_id' => $request->input('option')
         ]);
 
         //Le produit a été créé avec succès
@@ -72,6 +73,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->quantity = $request->input('quantity');
+        $product->category_id = $request->input('option');
         $product->save();
 
         //Le produit a été modifié avc succès

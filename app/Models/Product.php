@@ -19,7 +19,8 @@ class Product extends Model
         'price',
         'photo',
         'average_score',
-        'quantity'
+        'quantity',
+        'category_id'
     ];
 
     public $timestamps = false;
